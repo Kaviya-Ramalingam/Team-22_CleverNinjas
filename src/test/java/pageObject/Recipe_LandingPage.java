@@ -25,10 +25,10 @@ public class Recipe_LandingPage extends BaseTest {
 	@FindBy(css = "a[title='Recipea A to Z']")
 	WebElement recipeAtoZ;
 
-	@FindBy(xpath = "//table/tbody/tr/td/table[@class='mnualphaitem ctl00_cntleftpanel_mnuAlphabets_4']/tbody/tr/td/a[1]")
+	@FindBy(xpath = "//table[@class='mnualphaitem ctl00_cntleftpanel_mnuAlphabets_4']/tbody/tr/td/a")
 	List<WebElement> AtoZ_pagination;
 
-	@FindBy(xpath = "//div[@id='maincontent']/div/div[@id='cardholder']/div[3]/a")
+	@FindBy(xpath = "//div[@id='maincontent']/div[1]/div[2]/a")
 	List<WebElement> numbers_pagination;
 
 	int paginationsize;

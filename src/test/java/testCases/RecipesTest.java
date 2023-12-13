@@ -36,5 +36,8 @@ public class RecipesTest extends BaseTest {
 	@Test(priority=2)
 	public void Pagination() {
           rp.clickRecipeAtoZ();
+          
+          
+          
 	}
 }
