@@ -58,8 +58,8 @@ public class Recipe_LandingPage extends BaseTest {
 	}
 		
 	public int AtoZPaginationSize() {
-		int sizeOfAtoZ_pagination = AtoZPagination.size();
-		return sizeOfAtoZ_pagination;
+		int sizeOfAtoZPagination = AtoZPagination.size();
+		return sizeOfAtoZPagination;
 	}
 	
 }
