@@ -26,10 +26,10 @@ public class Recipe_LandingPage extends BaseTest {
 	WebElement RecipeAtoZ;
 
 	@FindBy(xpath = "//table[@id='ctl00_cntleftpanel_mnuAlphabets']//td[1]/a")
-	List<WebElement> AtoZ_pagination;
+	List<WebElement> AtoZPagination;
 	
 	@FindBy(xpath = "//div[@id='maincontent']/div[1]/div[2]/a")
-	List<WebElement> numbers_pagination;
+	List<WebElement> NumbersPagination;
 
 	@FindBy(xpath = "//div/div[@class='rcc_recipecard'][1]//div[2]/span")
 	List<WebElement> RecipeID;
@@ -41,12 +41,12 @@ public class Recipe_LandingPage extends BaseTest {
 		RecipeAtoZ.click();
 	}
 
-	public List<WebElement> AtoZ_pagination() {
-		return AtoZ_pagination;
+	public List<WebElement> AtoZPagination() {
+		return AtoZPagination;
 	}
 
-	public List<WebElement> numbers_pagination() {
-		return numbers_pagination;
+	public List<WebElement> NumbersPagination() {
+		return NumbersPagination;
 	}
 	
 	public List<WebElement> RecipeID() {
@@ -58,7 +58,7 @@ public class Recipe_LandingPage extends BaseTest {
 	}
 		
 	public int AtoZPaginationSize() {
-		int sizeOfAtoZ_pagination = AtoZ_pagination.size();
+		int sizeOfAtoZ_pagination = AtoZPagination.size();
 		return sizeOfAtoZ_pagination;
 	}
 	

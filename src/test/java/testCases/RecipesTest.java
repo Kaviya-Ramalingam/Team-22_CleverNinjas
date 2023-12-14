@@ -43,7 +43,7 @@ public class RecipesTest extends BaseTest {
 		System.out.println("AtoZpage size:" + alphaPagination);
 
 		for (int i = 0; i < alphaPagination; i++) {
-			String str = rlp.AtoZ_pagination().get(i).getText();
+			String str = rlp.AtoZPagination().get(i).getText();
 			String strText = "\"" + str + "\"";
 			System.out.println(strText);
 			WebElement alphaPagination1 = driver.findElement(By.xpath(
@@ -51,7 +51,7 @@ public class RecipesTest extends BaseTest {
 
 			alphaPagination1.click(); 
 			
-			List<WebElement> paginationLinks = rlp.numbers_pagination();// Find all pagination links once
+			List<WebElement> paginationLinks = rlp.NumbersPagination();// Find all pagination links once
 																							
 			if (!paginationLinks.isEmpty()) {
 				int numberOfPages = Integer.parseInt(paginationLinks.get(paginationLinks.size() - 1).getText());
