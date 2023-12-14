@@ -22,20 +22,44 @@ public class Recipe_LandingPage extends BaseTest {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css = "a[title='Recipea A to Z']")
-	WebElement recipeAtoZ;
+	@FindBy(xpath = "//a[@title='Recipea A to Z']")
+	WebElement RecipeAtoZ;
 
-	@FindBy(xpath = "//table[@class='mnualphaitem ctl00_cntleftpanel_mnuAlphabets_4']/tbody/tr/td/a")
-	List<WebElement> AtoZ_pagination;
-
+	@FindBy(xpath = "//table[@id='ctl00_cntleftpanel_mnuAlphabets']//td[1]/a")
+	List<WebElement> AtoZPagination;
+	
 	@FindBy(xpath = "//div[@id='maincontent']/div[1]/div[2]/a")
-	List<WebElement> numbers_pagination;
+	List<WebElement> NumbersPagination;
 
-	int paginationsize;
+	@FindBy(xpath = "//div/div[@class='rcc_recipecard'][1]//div[2]/span")
+	List<WebElement> RecipeID;
+
+	@FindBy(xpath = "//div/div[@class='rcc_recipecard'][1]/div[3]/span/a")
+	List<WebElement> RecipeName;
 
 	public void clickRecipeAtoZ() {
-
-		recipeAtoZ.click();
+		RecipeAtoZ.click();
 	}
 
+	public List<WebElement> AtoZPagination() {
+		return AtoZPagination;
+	}
+
+	public List<WebElement> NumbersPagination() {
+		return NumbersPagination;
+	}
+	
+	public List<WebElement> RecipeID() {
+		return RecipeID;
+	}
+
+	public List<WebElement> RecipeName() {
+		return RecipeName;
+	}
+		
+	public int AtoZPaginationSize() {
+		int sizeOfAtoZPagination = AtoZPagination.size();
+		return sizeOfAtoZPagination;
+	}
+	
 }
