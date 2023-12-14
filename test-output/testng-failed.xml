@@ -5,9 +5,7 @@
     <classes>
       <class name="testCases.RecipesTest">
         <methods>
-          <include name="scraping"/>
-          <include name="landingPage"/>
-          <include name="getUrl"/>
+          <include name="Pagination"/>
           <include name="setup"/>
         </methods>
       </class> <!-- testCases.RecipesTest -->

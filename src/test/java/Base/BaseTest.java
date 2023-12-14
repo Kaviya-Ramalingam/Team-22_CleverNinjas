@@ -12,7 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BaseTest {
 
-	public WebDriver driver;
+	public static WebDriver driver;
 	public Properties prop;
 
 	public WebDriver initializedriver() throws IOException {
@@ -20,7 +20,7 @@ public class BaseTest {
 		prop = new Properties();
 
 		FileInputStream fis = new FileInputStream(
-				"/Users/uvaraj/eclipse-workspace/Team22_RecipeScraping/src/test/resources/data.properties");
+				"C:/Users/sudha/git/RecipeScraping/src/test/resources/data.properties");
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 
@@ -32,9 +32,13 @@ public class BaseTest {
 		} else if (browserName.equalsIgnoreCase("edge")) {
 			driver = new EdgeDriver();
 		}
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().window().maximize();
 		return driver;
+	}
+	
+	public static void navigateNextpage(String url) {
+		driver.navigate().to(url);
 	}
 
 }
