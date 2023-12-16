@@ -60,6 +60,17 @@ public class RecipesTest extends BaseTest {
 					WebElement numPagination = driver
 							.findElement(By.xpath("//div[@id='maincontent']/div[1]/div[2]/a[text()=" + j + "]"));
 					numPagination.click();
+					
+					for (int k = 0; k < rlp.RecipeNameSize(); k++) {
+						System.out.println("Recipe Name: "+rlp.RecipeName.get(k).getText());
+						
+						rlp.getRecipeID(k);
+                        rlp.RecipeName.get(k).click();
+						rdp.getNutrientValues();
+						driver.navigate().back();
+					
+					}
+					
 				}
 				} else {
 					System.out.println("List is empty. No elements found.");
