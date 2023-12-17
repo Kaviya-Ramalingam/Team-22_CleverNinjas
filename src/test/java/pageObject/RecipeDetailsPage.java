@@ -98,11 +98,11 @@ public class RecipeDetailsPage extends BaseTest {
 		System.out.println(ct);
 			if (ct.contentEquals("Breakfast")) {
 				System.out.println("The recipe category is breakfast");
-				if (ct.contentEquals("lunch")) {
+				if (ct.contentEquals("Lunch")) {
 					System.out.println("The recipe category is lunch");
-					if (ct.contentEquals("snack")) {
+					if (ct.contentEquals("Snack")) {
 						System.out.println("The recipe category is snack");
-						if (ct.contentEquals("dinner")) {
+						if (ct.contentEquals("Dinner")) {
 							System.out.println("The recipe category is dinner");
 						}
 					}
@@ -115,12 +115,12 @@ public class RecipeDetailsPage extends BaseTest {
 	public void getFoodCategory() {
 		String ct=tagValue.getText();
 		//System.out.println(ct);
-			
+		
 			if (ct.contentEquals("Veg")) {
 				System.out.println("The recipe category is Veg");
 				if (ct.contentEquals("non-veg")) {
 					System.out.println("The recipe category is lunch");
-					if (ct.contentEquals("vegan")) {
+					if (ct.contentEquals("Vegan")) {
 						System.out.println("The recipe category is snack");
 						if (ct.contentEquals("Jain")) {
 							System.out.println("The recipe category is Jain");
