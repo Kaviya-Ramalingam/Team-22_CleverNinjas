@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -20,13 +21,14 @@ public class BaseTest {
 		prop = new Properties();
 
 		FileInputStream fis = new FileInputStream(
-				"C:/Users/sudha/git/RecipeScraping/src/test/resources/data.properties");
+				"C:/Users/Srisw/git/RecipeScraping/src/test/resources/data.properties");
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equalsIgnoreCase("chrome")) {
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("headless");
 			driver = new ChromeDriver();
-
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 			driver = new FirefoxDriver();
 		} else if (browserName.equalsIgnoreCase("edge")) {
@@ -36,7 +38,7 @@ public class BaseTest {
 		driver.manage().window().maximize();
 		return driver;
 	}
-	
+
 	public static void navigateNextpage(String url) {
 		driver.navigate().to(url);
 	}

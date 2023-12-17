@@ -16,26 +16,29 @@ public class Recipe_LandingPage extends BaseTest {
 	Properties prop;
 
 	public Recipe_LandingPage(WebDriver driver, Properties prop) {
-
 		this.driver = driver;
 		this.prop = prop;
 		PageFactory.initElements(driver, this);
 	}
 
 	@FindBy(xpath = "//a[@title='Recipea A to Z']")
-	WebElement RecipeAtoZ;
-
+	public WebElement RecipeAtoZ;
 	@FindBy(xpath = "//table[@id='ctl00_cntleftpanel_mnuAlphabets']//td[1]/a")
-	List<WebElement> AtoZPagination;
-	
+	public List<WebElement> AtoZPagination;
 	@FindBy(xpath = "//div[@id='maincontent']/div[1]/div[2]/a")
-	List<WebElement> NumbersPagination;
-
-	@FindBy(xpath = "//div/div[@class='rcc_recipecard'][1]//div[2]/span")
-	List<WebElement> RecipeID;
-
-	@FindBy(xpath = "//div/div[@class='rcc_recipecard'][1]/div[3]/span/a")
-	List<WebElement> RecipeName;
+	public List<WebElement> NumbersPagination;
+	@FindBy(xpath = "//div[@class='rcc_recipecard']")
+	public List<WebElement> RecipeID;
+	@FindBy(xpath = "//span[@class='rcc_recipename']/a")
+	public List<WebElement> RecipeName;
+	@FindBy(xpath = "//div[@class='rcc_recipecard']")
+	public List<WebElement> Recipecard;
+	@FindBy(xpath = "//time[@itemprop='prepTime']")
+	public List<WebElement> preparationTime;
+	@FindBy(xpath = "//time[@itemprop='cookTime']")
+	public List<WebElement> cookingTime;
+	
+	int paginationsize;
 
 	public void clickRecipeAtoZ() {
 		RecipeAtoZ.click();
@@ -48,18 +51,35 @@ public class Recipe_LandingPage extends BaseTest {
 	public List<WebElement> NumbersPagination() {
 		return NumbersPagination;
 	}
-	
-	public List<WebElement> RecipeID() {
-		return RecipeID;
+
+	public String getRecipeID(int k) {
+		String recipeId = RecipeID.get(k).getAttribute("id");
+		String[] RecipeID = recipeId.split("p");
+		System.out.println("RecipeID: " + RecipeID[1]);
+		return recipeId;
 	}
 
-	public List<WebElement> RecipeName() {
-		return RecipeName;
-	}
-		
 	public int AtoZPaginationSize() {
 		int sizeOfAtoZPagination = AtoZPagination.size();
 		return sizeOfAtoZPagination;
 	}
-	
+
+	public String getUrl() {
+		String url = driver.getCurrentUrl();
+		System.out.println("Recipe Url :" + url);
+		return url;
+	}
+
+	public int RecipecardSize() {
+		return Recipecard.size();
+	}
+
+	public int RecipeNameSize() {
+		return RecipeName.size();
+	}
+
+	public int RecipeIDSize() {
+		return RecipeID.size();
+	}
+
 }
