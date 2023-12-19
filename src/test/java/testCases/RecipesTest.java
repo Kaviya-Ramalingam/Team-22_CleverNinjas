@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.AssertJUnit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -23,8 +24,9 @@ public class RecipesTest extends BaseTest {
 	public void setup() throws IOException {
 
 		initializedriver();
+
 		rlp = new Recipe_LandingPage(driver, prop);
-		rdp = new RecipeDetailsPage(driver);
+		rdp = new RecipeDetailsPage(driver, prop);
 
 	}
 
@@ -35,36 +37,44 @@ public class RecipesTest extends BaseTest {
 		driver.get(url);
 
 	}
-
 	@Test(priority = 2)
 	public void Pagination() {
 		rlp.clickRecipeAtoZ();
 		int alphaPagination = rlp.AtoZPaginationSize();
 		System.out.println("AtoZpage size:" + alphaPagination);
-
 		for (int i = 0; i < alphaPagination; i++) {
-			String str = rlp.AtoZPagination().get(i).getText();
+			String str = rlp.AtoZPagination.get(i).getText();
 			String strText = "\"" + str + "\"";
 			System.out.println(strText);
-			WebElement alphaPagination1 = driver.findElement(By.xpath(
-					"//table[@id='ctl00_cntleftpanel_mnuAlphabets']//td[1]//a[text()=" + strText + "]"));
-
-			alphaPagination1.click(); 
-			
-			List<WebElement> paginationLinks = rlp.NumbersPagination();// Find all pagination links once
-																							
+			WebElement alphaPagination1 = driver.findElement(
+					By.xpath("//table[@id='ctl00_cntleftpanel_mnuAlphabets']//td[1]//a[text()=" + strText + "]"));
+			alphaPagination1.click();
+			List<WebElement> paginationLinks = rlp.NumbersPagination;// Find all pagination links once
 			if (!paginationLinks.isEmpty()) {
 				int numberOfPages = Integer.parseInt(paginationLinks.get(paginationLinks.size() - 1).getText());
-				System.out.println("Number of pages in " + str +" is: " + numberOfPages);
+				System.out.println("Number of pages in alphabet " + str + " is: " + numberOfPages);
 				for (int j = 1; j <= numberOfPages; j++) {
 					WebElement numPagination = driver
 							.findElement(By.xpath("//div[@id='maincontent']/div[1]/div[2]/a[text()=" + j + "]"));
 					numPagination.click();
+
+					int RecipesInPage = rlp.RecipeNameSize();
+					System.out.println(
+							"Total recipes in alphabet " + str + " number " + j + " page is: " + RecipesInPage);
+					for (int k = 0; k < RecipesInPage; k++) {						
+						System.out.println("Recipe Name: " + rlp.RecipeName.get(k).getText());
+						rlp.getRecipeID(k);
+						rlp.RecipeName.get(k).click();
+						rdp.preparationMethod();
+						rdp.getNutrientValues();
+						rlp.getUrl();	
+          }
 				}
-				} else {
-					System.out.println("List is empty. No elements found.");
-				}
-				driver.navigate().back();
+			} else {
+				System.out.println("List is empty. No elements found.");
+			}
+			driver.navigate().back();
 		}
 	}
 }
+	

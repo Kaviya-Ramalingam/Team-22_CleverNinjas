@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import Base.BaseTest;
+
 public class RecipeDetailsPage extends BaseTest {
 	WebDriver driver;
 	public String ingredientsText;
@@ -13,6 +14,7 @@ public class RecipeDetailsPage extends BaseTest {
 	public String cookingTimeText;
 	public String preparationMethodText;
 	public String nutrientValuesText;
+  
 	public RecipeDetailsPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -29,7 +31,8 @@ public class RecipeDetailsPage extends BaseTest {
 	List<WebElement> PreparationMethod;
 	@FindBy(xpath = "//div[@id='recipe_nutrients']")
 	List<WebElement> NutrientValues;
-
+//	@FindBy(xpath = "//div[@id='recipe_tags']/a/span[contains(text(),'Diabetic')]")
+//	List<WebElement> DiabeticRecipe;
 	public String getRecipeCategory() {
 		// Recipe Category(Breakfast/Lunch/Snack/Dinner)
 		if (Objects.nonNull(RecipeCategory) && !RecipeCategory.isEmpty()) {
@@ -127,3 +130,18 @@ public class RecipeDetailsPage extends BaseTest {
 		return recURL;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
