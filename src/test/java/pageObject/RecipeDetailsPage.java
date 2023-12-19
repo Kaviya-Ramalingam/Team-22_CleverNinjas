@@ -1,141 +1,145 @@
 package pageObject;
-
 import java.util.List;
-import java.util.Properties;
-
+import java.util.Objects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import Base.BaseTest;
 
 public class RecipeDetailsPage extends BaseTest {
-
 	WebDriver driver;
-	Properties prop;
-
-	public RecipeDetailsPage(WebDriver driver, Properties prop) {
+	public String ingredientsText;
+	public String preparationTimeText;
+	public String cookingTimeText;
+	public String preparationMethodText;
+	public String nutrientValuesText;
+	public RecipeDetailsPage(WebDriver driver) {
 		this.driver = driver;
-		this.prop = prop;
-
 		PageFactory.initElements(driver, this);
 	}
-	// div[@id=‘rcpnuts’]--table with upper data
-	// table[@id=‘rcpnutrients’]--only for table
+	@FindBy(xpath = "//div[@id='recipe_tags']/a")
+	public List<WebElement> RecipeCategory;
+	@FindBy(xpath = "//div[@id='rcpinglist']")
+	public List<WebElement> Ingredients;
+	@FindBy(xpath = "//time[@itemprop='prepTime'] | //div[@class= 'col-xs-12 col-md-12 col-sm-12 col-lg-12']/section[2]/p/text()[1]")
+	public List<WebElement> PreparationTime;
+	@FindBy(xpath = "//time[@itemprop='cookTime'] | //div[@class= 'col-xs-12 col-md-12 col-sm-12 col-lg-12']/section[2]/p/text()[1]")
+	List<WebElement> CookingTime;
+	@FindBy(xpath = "//div[@id='recipe_small_steps']")
+	List<WebElement> PreparationMethod;
+	@FindBy(xpath = "//div[@id='recipe_nutrients']")
+	List<WebElement> NutrientValues;
 
-	@FindBy(xpath = "")
-	public List<WebElement> FoodCategory;
-	@FindBy(xpath = "")
-	public List<WebElement> ingredients;
-	@FindBy(xpath = "")
-	public List<WebElement> preparationMethod;
-	@FindBy(xpath = "//div[@id=‘recipe_nutrients’]")
-	public List<WebElement> nutrientValues;
-
-	// table[@id='rcpnutrients']/tbody
-//			@FindBy(xpath= “//div[@id=‘recipe_nutrients’]/div[1]//table/tbody”)
-//			public List<WebElement> nutrientValues;
-
-//			@FindBy(xpath= “//span[@itemprop=‘nutrition’]“)
-//			List<WebElement> nutrientValues;
-
-	
-
-	/*
-	 * public String getFoodCategory() { // not having xpath for this variable if
-	 * (!foodCategory.isEmpty()) { String categoryOfFood =
-	 * foodCategory.get(0).getText(); System.out.println("Category of food: "); }
-	 * return categoryOfFood ;
-	 * 
-	 * }
-	 */
-
-	/*
-	 * public String getIngredients() { if (!ingredients.isEmpty()) { String
-	 * ingredientsName = ingredients.get(0).getText();
-	 * System.out.println("ingredients name " + ingredients.get(0).getText());
-	 * 
-	 * }
-	 * 
-	 * }
-	 */
-	public String preparationMethod() {
-		if (!preparationMethod.isEmpty()) {
-			System.out.println("ingredientmethod " + preparationMethod.get(0).getText());
-			methodName = preparationMethod.get(0).getText();
+	public String getRecipeCategory() {
+		// Recipe Category(Breakfast/Lunch/Snack/Dinner)
+		if (Objects.nonNull(RecipeCategory) && !RecipeCategory.isEmpty()) {
+			String recipeCategory = RecipeCategory.get(0).getText().toLowerCase();
+			if (recipeCategory.contains("breakfast")) {
+				System.out.println("Recipe Category: Breakfast");
+				return "Breakfast"; // This return statement to print this string on Excel
+			} else if (recipeCategory.contains("lunch")) {
+				System.out.println("Recipe Category: Lunch");
+				return "Lunch";
+			} else if (recipeCategory.contains("snack")) {
+				System.out.println("Recipe Category: Snack");
+				return "Snack";
+			} else if (recipeCategory.contains("dinner")) {
+				System.out.println("Recipe Category: Dinner");
+				return "Dinner";
+			} else {
+				System.out.println("Recipe Category: Recipe category list is not mentioned in this recipe.");
+				return "Recipe category list is not mentioned in this recipe.";
+			}
 		}
-		return methodName;
+		return null;
 	}
-
-	public String getNutrientValues() {
-		if (!nutrientValues.isEmpty()) {
-			System.out.println("NutrientValue:  " + nutrientValues.get(0).getText());
-			// System.out.println(“NutrientValue:”
-			// +nutrientValues.get(0).getAttribute("tbody"));
-			nutrientValue = nutrientValues.get(0).getText();
-//				}else {
-//					System.out.println(“NutrientValue not found:“);
-
+	public String getFoodCategory() {
+		// Food Category(Veg/non-veg/vegan/Jain)
+		if (Objects.nonNull(RecipeCategory) && !RecipeCategory.isEmpty()) {
+			String recipeCategory = RecipeCategory.get(0).getText().toLowerCase();
+			// using RecipeCategory's xpath for food category because both xpaths are same
+			if (recipeCategory.contains("veg")) {
+				System.out.println("Food Category: Veg");
+				return "Veg";
+			} else if (recipeCategory.contains("non-veg")) {
+				System.out.println("Food Category: Non Veg");
+				return "Non Veg";
+			} else if (recipeCategory.contains("vegan")) {
+				System.out.println("Food Category: Vegan");
+				return "Vegan";
+			} else if (recipeCategory.contains("jain")) {
+				System.out.println("Food Category: Jain");
+				return "Jain";
+			} else {
+				System.out.println("Food Category: Food category list is not mentioned in this recipe.");
+				return "Food category list is not mentioned in this recipe.";
+			}
 		}
-		return nutrientValue;
-
+		return null;
 	}
-
+	public String getIngredients() {
+		if (Objects.nonNull(Ingredients) && !Ingredients.isEmpty()) {
+			String ingredientsText = Ingredients.get(0).getText();
+			System.out.println("Ingredients: " + ingredientsText);
+			return ingredientsText;
+		}
+		return "";
+	}
 	public String getPreparationTime() {
-		if (!preparationTime.isEmpty()) {
-			String preparingTime = preparationTime.get(0).getText();
-			System.out.println("preparationTime " + preparationTime.get(0).getText());
-
+		if (Objects.nonNull(PreparationTime) && !PreparationTime.isEmpty()) {
+			String preparationTimeText = PreparationTime.get(0).getText();
+			System.out.println("Preparation Time : " + preparationTimeText);
+			return preparationTimeText;
 		}
-		return preparingTime;
+		return "";
 	}
-
-	public String cookingTime() {
-		if (!cookingTime.isEmpty()) {
-			Strig cookTime = cookingTime.get(0).getText();
-			System.out.println("cookingTime " + cookingTime.get(0).getText());
-			
+	public String getCookingTime() {
+		if (Objects.nonNull(CookingTime) && !CookingTime.isEmpty()) {
+			String cookingTimeText = CookingTime.get(0).getText();
+			System.out.println("Cooking Time:  " + cookingTimeText);
+			return cookingTimeText;
 		}
-		return cookTime;
+		return "";
+	}
+	public String getPreparationMethod() {
+		if (Objects.nonNull(PreparationMethod) && !PreparationMethod.isEmpty()) {
+			String preparationMethodText = PreparationMethod.get(0).getText();
+			System.out.println("Preparation Method: " + preparationMethodText);
+			return preparationMethodText;
+		}
+		return "";
+	}
+	public String getNutrientValues() {
+		if (Objects.nonNull(NutrientValues) && !NutrientValues.isEmpty()) {
+			String nutrientValuesText = NutrientValues.get(0).getText();
+			System.out.println("NutrientValue: " + nutrientValuesText);
+			if (nutrientValuesText.isEmpty()) {
+				System.out.println("Nutrient Value is empty.");
+				return "Nutrient Value is empty.";
+			}
+			return nutrientValuesText;
+		}
+		return "";
+	}
+	public String getRecipeURL() {
+		String recURL = driver.getCurrentUrl();
+		System.out.println("RecipeURL:  " + recURL);
+		return recURL;
 	}
 }
 
-/*
- * @FindBy(css = "a[title='Recipea A to Z']") WebElement recipeAtoZ;
- * //@FindBy(xpath =
- * "//table[@class='mnualphaitem ctl00_cntleftpanel_mnuAlphabets_4']/tbody/tr/td/a"
- * ) //@FindBy(xpath =
- * "//table[@id='ctl00_cntleftpanel_mnuAlphabets']//td[1]/a") //public
- * List<WebElement> AtoZ_pagination;
- * 
- * @FindBy(
- * xpath="//a[contains(@class,'ctl00_cntleftpanel_mnuAlphabets_1 mnualphaitem ctl00_cntleftpanel_mnuAlphabets_3')]"
- * ) public List<WebElement> AtoZ_pagination;
- * 
- * @FindBy(xpath = "//div[@id='maincontent']/div[1]/div[2]/a") public
- * List<WebElement> numbers_pagination;
- * 
- * //@FindBy(xpath="//div[3]/span[1]/a")
- * 
- * @FindBy(xpath="//span[@class='rcc_recipename']/a") public List<WebElement>
- * recipeName;
- * 
- * //@FindBy(xpath = "//div/div[@class='rcc_recipecard'][1]//div[2]/span")
- * 
- * @FindBy(
- * xpath="//div[@class='rcc_recipecard']/div[2]/span | //div[@class='rcc_recipecard']/s/div[2]/span"
- * ) public List<WebElement> RecipeID;
- * 
- * @FindBy(xpath="//div[@class='rcc_recipecard']") public List<WebElement>
- * recipeCard;
- * 
- * @FindBy(xpath = "//div[@id='recipe_small_steps']") List<WebElement>
- * preparationMethod;
- * 
- * @FindBy(xpath = "//div[@id='recipe_nutrients']") List<WebElement>
- * nutrientValues;
- * 
-  * 
- * }
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+

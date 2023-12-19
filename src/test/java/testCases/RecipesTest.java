@@ -57,6 +57,7 @@ public class RecipesTest extends BaseTest {
 					WebElement numPagination = driver
 							.findElement(By.xpath("//div[@id='maincontent']/div[1]/div[2]/a[text()=" + j + "]"));
 					numPagination.click();
+
 					int RecipesInPage = rlp.RecipeNameSize();
 					System.out.println(
 							"Total recipes in alphabet " + str + " number " + j + " page is: " + RecipesInPage);
@@ -66,11 +67,8 @@ public class RecipesTest extends BaseTest {
 						rlp.RecipeName.get(k).click();
 						rdp.preparationMethod();
 						rdp.getNutrientValues();
-						rlp.getUrl();
-						//rlp.RecipeName.get(k).click();
-						//driver.navigate().back();		
-						
-					}
+						rlp.getUrl();	
+          }
 				}
 			} else {
 				System.out.println("List is empty. No elements found.");

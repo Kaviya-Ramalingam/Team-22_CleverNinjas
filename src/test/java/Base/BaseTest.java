@@ -21,14 +21,19 @@ public class BaseTest {
 		prop = new Properties();
 
 		FileInputStream fis = new FileInputStream(
-				"C:/Users/Srisw/git/RecipeScraping/src/test/resources/data.properties");
+
+				"/Users/sathvik_balla/git/RecipeScraping/src/test/resources/data.properties");
+
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equalsIgnoreCase("chrome")) {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("headless");
-			driver = new ChromeDriver();
+
+			driver = new ChromeDriver(options);
+
+
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 			driver = new FirefoxDriver();
 		} else if (browserName.equalsIgnoreCase("edge")) {
