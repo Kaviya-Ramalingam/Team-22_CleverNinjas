@@ -21,14 +21,18 @@ public class BaseTest {
 		prop = new Properties();
 
 		FileInputStream fis = new FileInputStream(
+
 				"/Users/sathvik_balla/git/RecipeScraping/src/test/resources/data.properties");
+
 		prop.load(fis);
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equalsIgnoreCase("chrome")) {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("headless");
+
 			driver = new ChromeDriver(options);
+
 
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 			driver = new FirefoxDriver();
@@ -39,7 +43,7 @@ public class BaseTest {
 		driver.manage().window().maximize();
 		return driver;
 	}
-	
+
 	public static void navigateNextpage(String url) {
 		driver.navigate().to(url);
 	}
